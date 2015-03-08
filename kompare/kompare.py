@@ -79,7 +79,6 @@ def _kompare(left, right):
 
     Some notes:
         - This function handles namedtuples by digging into their underlying dict representations.
-        - subclasses of tuple, that are not namedtuples may not work
         - Ignores order of key appearance in dicts but cares for iterables
 
     example result:
@@ -110,13 +109,20 @@ def _kompare(left, right):
         # subclass of tuple but is not a namedtuple, this may not work.
         if isinstance(actual, tuple) and type(actual) != tuple:
             try:
+                # This covers named tuples and anything that inherits from tuple
+                # and has __dict__ defined
                 actual = vars(actual)
                 expected = vars(expected)
             except TypeError:
                 try:
+                    # This covers the class(namedtuple(X, [...])) case. Where a class
+                    # is a subclass of the result of a call to namedtuple. We need the
+                    # underlying structure in that case.
                     actual = vars(super(type(actual), actual))
                     expected = vars(super(type(expected), expected))
-                except:
+                except TypeError:
+                    # If it's a simpler extension of tuple we can just go on and let
+                    # the Iterable check handle it.
                     pass
 
         if isinstance(actual, dict):

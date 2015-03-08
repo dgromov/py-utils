@@ -34,8 +34,8 @@ def get_readme():
 
 setup(
     name="kompare2",
-    version='0.1-DEV',
-    url="https://knewton.atlassian.net/wiki/display/TECH/%(name)s",
+    version='0.1',
+    url="https://github.com/dgromov/py-utils",
     author="Dmitriy Gromov",
     author_email="dmitriy.k.gromov@gmail.com",
     license="Proprietary",
@@ -43,6 +43,6 @@ setup(
     cmdclass={"test": PyTest},
     install_requires=open('requirements.txt', 'r').readlines(),
     tests_require=open('requirements.testing.txt', 'r').readlines(),
-    description="test build deploy tool",
+    description="smart comparison function",
     long_description="\n" + get_readme()
 )
