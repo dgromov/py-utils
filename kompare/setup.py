@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
 import glob
 from setuptools import find_packages, setup
 from setuptools.command.test import test as TestCommand
@@ -33,12 +33,11 @@ def get_readme():
     return ""
 
 setup(
-    name="kompare2",
-    version='0.1',
-    url="https://github.com/dgromov/py-utils",
+    name="kompare",
+    version='0.1.0',
+    url="https://github.com/dgromov/py-utils/kompare",
     author="Dmitriy Gromov",
     author_email="dmitriy.k.gromov@gmail.com",
-    license="Proprietary",
     packages=find_packages(),
     cmdclass={"test": PyTest},
     install_requires=open('requirements.txt', 'r').readlines(),
